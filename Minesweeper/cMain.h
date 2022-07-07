@@ -12,6 +12,8 @@ public:
 	int nFieldWidth = 10;
 	int nFieldHeight = 10;
 	wxButton **btn;
+	int* nField = nullptr;
+	bool bFirstClick = true;
 	
 	//wxButton* m_btn1 = nullptr;
 	//wxTextCtrl* m_txt1 = nullptr;
