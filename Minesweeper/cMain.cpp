@@ -12,11 +12,14 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Minesweeper Juan De La Fuente", wxP
 
 	nField = new int[nFieldWidth * nFieldHeight];
 
+	wxFont font(24, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+
 	for (int x = 0; x < nFieldWidth; x++)
 	{
 		for (int y = 0; y < nFieldHeight; y++)
 		{
 			btn[y * nFieldWidth + x] = new wxButton(this, 10000 + (y * nFieldWidth + x));
+			btn[y * nFieldWidth + x]->SetFont(font);
 			grid->Add(btn[y * nFieldWidth + x], 1, wxEXPAND | wxALL);
 
 			btn[y * nFieldWidth + x]->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &cMain::OnButtonClicked, this);
@@ -65,10 +68,10 @@ void cMain::OnButtonClicked(wxCommandEvent& evt)
 
 	if (nField[y * nFieldWidth + x] == -1)
 	{
-		wxMessageBox("WAGABOOOOM BABY!! GAME IS DONE'O   :( ");
+		wxMessageBox("BOOO000000OM BABY!! GAME IS DONE'O   :( ");
 		bFirstClick = true;
-		for (int x =0; x <nFieldWidth; x++)
-			for (int y = 0; y > nFieldHeight; y++)
+		for (int x =0; x < nFieldWidth; x++)
+			for (int y = 0; y < nFieldHeight; y++)
 			{
 				nField[y * nFieldWidth + x] = 0;
 				btn[y * nFieldWidth + x]->SetLabel("");
@@ -78,12 +81,12 @@ void cMain::OnButtonClicked(wxCommandEvent& evt)
 	else
 	{
 		int mine_count = 0;
-		for (int i = -1; i<2;i++)
+		for (int i = -1; i < 2;i++)
 			for (int j = -1; j < 2; j++)
 			{
-				if (x + i >= 0 && x + 1 < nFieldWidth && y + j >= 0 && y + j < nFieldHeight)
+				if (x + i >= 0 && x + i < nFieldWidth && y + j >= 0 && y + j < nFieldHeight)
 				{
-					if (nField[(y + j) * nFieldWidth + (x + 1)] == -1)
+					if (nField[(y + j) * nFieldWidth + (x + i)] == -1)
 						mine_count++;
 				}
 			}
