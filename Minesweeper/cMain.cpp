@@ -5,7 +5,7 @@ wxBEGIN_EVENT_TABLE(cMain,wxFrame)
 wxEND_EVENT_TABLE()
 
 
-cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Minesweeper JD project!", wxPoint(30,30), wxSize(800,600))
+cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Minesweeper Juan De La Fuente", wxPoint(30,30), wxSize(800,600))
 {
 	btn = new wxButton * [nFieldWidth * nFieldHeight];
 	wxGridSizer* grid = new wxGridSizer(nFieldWidth, nFieldHeight, 0, 0);
@@ -16,6 +16,9 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Minesweeper JD project!", wxPoint(3
 		{
 			btn[y * nFieldWidth + x] = new wxButton(this, 10000 + (y * nFieldWidth + x));
 			grid->Add(btn[y * nFieldWidth + x], 1, wxEXPAND | wxALL);
+
+			btn[y * nFieldWidth + x]->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &cMain::OnButtonClicked, this);
+
 		}
 	}
 
@@ -29,11 +32,13 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Minesweeper JD project!", wxPoint(3
 
 cMain::~cMain()
 {
-
+	delete[]btn;
 }
 
 void cMain::OnButtonClicked(wxCommandEvent& evt)
 {
 	//m_list1->AppendString(m_txt1->GetValue());
+	int x = (evt.GetId() - 10000) % nFieldWidth;
+	int y = (evt.GetId() - 10000) / nFieldWidth;
 	evt.Skip();
 }
