@@ -12,6 +12,11 @@ cApp::~cApp()
 
 }
 
+bool cApp::onInit()
+{
+	return false;
+}
+
 bool cApp::OnInit()
 {
 	return true;
