@@ -10,5 +10,6 @@ public:
 
 public:
 	virtual bool onInit();
+	bool OnInit();
 };
 
